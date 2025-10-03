@@ -1,11 +1,31 @@
 "use client"
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
-export default function scene(){
+import { pass } from 'three/tsl';
+import { ReactFormState } from 'react-dom/client';
+export default function Scene(){
+    const [file,setfile] = useState<File>()
 
     const ThreeScene:React.FC = ()=>{
         const cret = useRef<HTMLElement>(null)
+
+        async function onsubmit(e:React.FormEvent<HTMLFormElement>){
+            e.preventDefault()
+            if (!file){return}
+            
+            const data = new FormData()
+            data.set('file', file )
+            const res = await fetch('api/upload', {
+                method:'POST',
+                body:data
+            })
+
+            if(!res){
+                console.log("NIGGA SOME THING BAD HAPPENED")
+            }
+            
+        }
 
         if(typeof window !== 'undefined'){
 
@@ -67,11 +87,19 @@ export default function scene(){
            
             </div>
         </div>  
-        <div className='m-5  w-75 '>
-            <div className='font-bold cursor-pointer w-33 h-11 bg-green-600 flex justify-center items-center hover:bg-green-800 hover:text-slate-300 rounded-md  '>
+        <div className='felx m-5  w-75 '>
+            <div>
+                 <main>
+                    <form onSubmit={onsubmit}>
+                        <input type="file" name='file' onChange={(e)=> setfile(e.target.files?.[0])}  />
+                        <input type="submit"value="Upload" className='font-bold cursor-pointer w-33 h-11 bg-green-600 flex justify-center items-center hover:bg-green-800 hover:text-slate-300 rounded-md '/>
 
-            Upload Model
+
+                    </form>
+
+                 </main>
             </div>
+
         </div>
     </div>
 
