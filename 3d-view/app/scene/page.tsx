@@ -13,7 +13,7 @@ export default function scene(){
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
             const renderer = new THREE.WebGLRenderer();
-            renderer.setSize(window.innerWidth/2,window.innerHeight/2);
+            renderer.setSize(window.innerWidth/1.3,window.innerHeight/1.3);
             cret.current?.appendChild(renderer.domElement)
             camera.position.z=5;
             
@@ -51,9 +51,30 @@ export default function scene(){
     return (
     
     <>
-    <div className='flex justify-center items-center h-screen w-screen'>
-        <ThreeScene  />
+    <div className='h-screen w-screen bg-slate-800'>
+        <div className='flex'>
+            <div className='mt-10 ml-5'>
+            <ThreeScene />
+
+            </div>
+            <div className='m-5 p-1 '>
+                <div className='flex justify-center  w-75 font-bold text-2xl'>
+                    Status
+                </div>
+                <div>- COLOR </div>
+                <br />
+                <div>- MESH </div>
+           
+            </div>
+        </div>  
+        <div className='m-5  w-75 '>
+            <div className='font-bold cursor-pointer w-33 h-11 bg-green-600 flex justify-center items-center hover:bg-green-800 hover:text-slate-300 rounded-md  '>
+
+            Upload Model
+            </div>
+        </div>
     </div>
+
     
     </>)
 }
