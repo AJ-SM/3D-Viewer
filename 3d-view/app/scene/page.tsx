@@ -2,15 +2,14 @@
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
-import { pass } from 'three/tsl';
-import { ReactFormState } from 'react-dom/client';
+
+
+
+
 export default function Scene(){
     const [file,setfile] = useState<File>()
 
-    const ThreeScene:React.FC = ()=>{
-        const cret = useRef<HTMLElement>(null)
-
-        async function onsubmit(e:React.FormEvent<HTMLFormElement>){
+    const  onSubmit= async (e:React.FormEvent<HTMLFormElement>)=>{
             e.preventDefault()
             if (!file){return}
             
@@ -26,6 +25,11 @@ export default function Scene(){
             }
             
         }
+
+    const ThreeScene:React.FC = ()=>{
+        const cret = useRef<HTMLElement>(null)
+
+        
 
         if(typeof window !== 'undefined'){
 
@@ -81,16 +85,26 @@ export default function Scene(){
                 <div className='flex justify-center  w-75 font-bold text-2xl'>
                     Status
                 </div>
-                <div>- COLOR </div>
+                <div className=' text-xl font-bold'>COLOR </div>
+                <div>RED: <div><input type="range" /></div></div>
+                <div>GREEN: <div><input type="range" /></div></div>
+                <div>BLUE: <div><input type="range" /></div></div>
+
                 <br />
-                <div>- MESH </div>
+                <div className=' text-xl font-bold'>MESH </div>
+                <div>
+                    <div className='p-3'>Mesh-1 <input type="checkbox" /></div>
+                    <div className='p-3'>Mesh-2 <input type="checkbox" /></div>
+                    <div className='p-3'>Mesh-3 <input type="checkbox" /></div>
+
+                </div>
            
             </div>
         </div>  
-        <div className='felx m-5  w-75 '>
+        <div className='felx m-5 w-75 '>
             <div>
                  <main>
-                    <form onSubmit={onsubmit}>
+                    <form onSubmit={onSubmit}>
                         <input type="file" name='file' onChange={(e)=> setfile(e.target.files?.[0])}  />
                         <input type="submit"value="Upload" className='font-bold cursor-pointer w-33 h-11 bg-green-600 flex justify-center items-center hover:bg-green-800 hover:text-slate-300 rounded-md '/>
 
