@@ -15,7 +15,7 @@ export async function POST(request:NextRequest){
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes)
 
-    const path = join('D:/CLEAN_CODE/Projects/3D-Product-Viewer/tmp','meta.png');
+    const path = join('D:/CLEAN_CODE/Projects/3D-Product-Viewer/3d-view/public/models','meta.glb');
     await writeFile(path,buffer)
     console.log(`Your file is saved at ${path}`)
 
